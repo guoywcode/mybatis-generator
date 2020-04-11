@@ -11,7 +11,7 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>groupId</groupId>
+  <groupId>com.guoyw</groupId>
   <artifactId>mybatis-generator</artifactId>
   <version>1.0.0</version>
 
