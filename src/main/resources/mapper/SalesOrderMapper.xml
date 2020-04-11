@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guoyw.mybatis.generator.mapper.SalesOrderMapper">
+  <resultMap id="BaseResultMap" type="com.guoyw.mybatis.generator.model.SalesOrder">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="created_at" jdbcType="BIGINT" property="createdAt" />
+    <result column="updated_at" jdbcType="BIGINT" property="updatedAt" />
+    <result column="actual_pay" jdbcType="REAL" property="actualPay" />
+    <result column="customer_purchases_id" jdbcType="VARCHAR" property="customerPurchasesId" />
+    <result column="customer_purchases_id_name" jdbcType="BIGINT" property="customerPurchasesIdName" />
+    <result column="debt_sum" jdbcType="REAL" property="debtSum" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+    <result column="operator_id" jdbcType="VARCHAR" property="operatorId" />
+    <result column="operator_id_name" jdbcType="VARCHAR" property="operatorIdName" />
+    <result column="sale_date" jdbcType="BIGINT" property="saleDate" />
+    <result column="sale_discount" jdbcType="REAL" property="saleDiscount" />
+    <result column="sale_discount_sum" jdbcType="REAL" property="saleDiscountSum" />
+    <result column="sale_num" jdbcType="VARCHAR" property="saleNum" />
+    <result column="sale_total_sum" jdbcType="REAL" property="saleTotalSum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, created_at, updated_at, actual_pay, customer_purchases_id, customer_purchases_id_name, 
+    debt_sum, notes, operator_id, operator_id_name, sale_date, sale_discount, sale_discount_sum, 
+    sale_num, sale_total_sum
+  </sql>
+  <select id="selectByExample" parameterType="com.guoyw.mybatis.generator.model.SalesOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sales_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sales_order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sales_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.guoyw.mybatis.generator.model.SalesOrderExample">
+    delete from sales_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.guoyw.mybatis.generator.model.SalesOrder">
+    insert into sales_order (id, created_at, updated_at, 
+      actual_pay, customer_purchases_id, customer_purchases_id_name, 
+      debt_sum, notes, operator_id, 
+      operator_id_name, sale_date, sale_discount, 
+      sale_discount_sum, sale_num, sale_total_sum
+      )
+    values (#{id,jdbcType=VARCHAR}, #{createdAt,jdbcType=BIGINT}, #{updatedAt,jdbcType=BIGINT}, 
+      #{actualPay,jdbcType=REAL}, #{customerPurchasesId,jdbcType=VARCHAR}, #{customerPurchasesIdName,jdbcType=BIGINT}, 
+      #{debtSum,jdbcType=REAL}, #{notes,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, 
+      #{operatorIdName,jdbcType=VARCHAR}, #{saleDate,jdbcType=BIGINT}, #{saleDiscount,jdbcType=REAL}, 
+      #{saleDiscountSum,jdbcType=REAL}, #{saleNum,jdbcType=VARCHAR}, #{saleTotalSum,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.guoyw.mybatis.generator.model.SalesOrder">
+    insert into sales_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="actualPay != null">
+        actual_pay,
+      </if>
+      <if test="customerPurchasesId != null">
+        customer_purchases_id,
+      </if>
+      <if test="customerPurchasesIdName != null">
+        customer_purchases_id_name,
+      </if>
+      <if test="debtSum != null">
+        debt_sum,
+      </if>
+      <if test="notes != null">
+        notes,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="operatorIdName != null">
+        operator_id_name,
+      </if>
+      <if test="saleDate != null">
+        sale_date,
+      </if>
+      <if test="saleDiscount != null">
+        sale_discount,
+      </if>
+      <if test="saleDiscountSum != null">
+        sale_discount_sum,
+      </if>
+      <if test="saleNum != null">
+        sale_num,
+      </if>
+      <if test="saleTotalSum != null">
+        sale_total_sum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=BIGINT},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=BIGINT},
+      </if>
+      <if test="actualPay != null">
+        #{actualPay,jdbcType=REAL},
+      </if>
+      <if test="customerPurchasesId != null">
+        #{customerPurchasesId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPurchasesIdName != null">
+        #{customerPurchasesIdName,jdbcType=BIGINT},
+      </if>
+      <if test="debtSum != null">
+        #{debtSum,jdbcType=REAL},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorIdName != null">
+        #{operatorIdName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleDate != null">
+        #{saleDate,jdbcType=BIGINT},
+      </if>
+      <if test="saleDiscount != null">
+        #{saleDiscount,jdbcType=REAL},
+      </if>
+      <if test="saleDiscountSum != null">
+        #{saleDiscountSum,jdbcType=REAL},
+      </if>
+      <if test="saleNum != null">
+        #{saleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="saleTotalSum != null">
+        #{saleTotalSum,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.guoyw.mybatis.generator.model.SalesOrderExample" resultType="java.lang.Long">
+    select count(*) from sales_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sales_order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=BIGINT},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=BIGINT},
+      </if>
+      <if test="record.actualPay != null">
+        actual_pay = #{record.actualPay,jdbcType=REAL},
+      </if>
+      <if test="record.customerPurchasesId != null">
+        customer_purchases_id = #{record.customerPurchasesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerPurchasesIdName != null">
+        customer_purchases_id_name = #{record.customerPurchasesIdName,jdbcType=BIGINT},
+      </if>
+      <if test="record.debtSum != null">
+        debt_sum = #{record.debtSum,jdbcType=REAL},
+      </if>
+      <if test="record.notes != null">
+        notes = #{record.notes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorId != null">
+        operator_id = #{record.operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorIdName != null">
+        operator_id_name = #{record.operatorIdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleDate != null">
+        sale_date = #{record.saleDate,jdbcType=BIGINT},
+      </if>
+      <if test="record.saleDiscount != null">
+        sale_discount = #{record.saleDiscount,jdbcType=REAL},
+      </if>
+      <if test="record.saleDiscountSum != null">
+        sale_discount_sum = #{record.saleDiscountSum,jdbcType=REAL},
+      </if>
+      <if test="record.saleNum != null">
+        sale_num = #{record.saleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleTotalSum != null">
+        sale_total_sum = #{record.saleTotalSum,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sales_order
+    set id = #{record.id,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=BIGINT},
+      updated_at = #{record.updatedAt,jdbcType=BIGINT},
+      actual_pay = #{record.actualPay,jdbcType=REAL},
+      customer_purchases_id = #{record.customerPurchasesId,jdbcType=VARCHAR},
+      customer_purchases_id_name = #{record.customerPurchasesIdName,jdbcType=BIGINT},
+      debt_sum = #{record.debtSum,jdbcType=REAL},
+      notes = #{record.notes,jdbcType=VARCHAR},
+      operator_id = #{record.operatorId,jdbcType=VARCHAR},
+      operator_id_name = #{record.operatorIdName,jdbcType=VARCHAR},
+      sale_date = #{record.saleDate,jdbcType=BIGINT},
+      sale_discount = #{record.saleDiscount,jdbcType=REAL},
+      sale_discount_sum = #{record.saleDiscountSum,jdbcType=REAL},
+      sale_num = #{record.saleNum,jdbcType=VARCHAR},
+      sale_total_sum = #{record.saleTotalSum,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.guoyw.mybatis.generator.model.SalesOrder">
+    update sales_order
+    <set>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=BIGINT},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=BIGINT},
+      </if>
+      <if test="actualPay != null">
+        actual_pay = #{actualPay,jdbcType=REAL},
+      </if>
+      <if test="customerPurchasesId != null">
+        customer_purchases_id = #{customerPurchasesId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPurchasesIdName != null">
+        customer_purchases_id_name = #{customerPurchasesIdName,jdbcType=BIGINT},
+      </if>
+      <if test="debtSum != null">
+        debt_sum = #{debtSum,jdbcType=REAL},
+      </if>
+      <if test="notes != null">
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorIdName != null">
+        operator_id_name = #{operatorIdName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleDate != null">
+        sale_date = #{saleDate,jdbcType=BIGINT},
+      </if>
+      <if test="saleDiscount != null">
+        sale_discount = #{saleDiscount,jdbcType=REAL},
+      </if>
+      <if test="saleDiscountSum != null">
+        sale_discount_sum = #{saleDiscountSum,jdbcType=REAL},
+      </if>
+      <if test="saleNum != null">
+        sale_num = #{saleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="saleTotalSum != null">
+        sale_total_sum = #{saleTotalSum,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.guoyw.mybatis.generator.model.SalesOrder">
+    update sales_order
+    set created_at = #{createdAt,jdbcType=BIGINT},
+      updated_at = #{updatedAt,jdbcType=BIGINT},
+      actual_pay = #{actualPay,jdbcType=REAL},
+      customer_purchases_id = #{customerPurchasesId,jdbcType=VARCHAR},
+      customer_purchases_id_name = #{customerPurchasesIdName,jdbcType=BIGINT},
+      debt_sum = #{debtSum,jdbcType=REAL},
+      notes = #{notes,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=VARCHAR},
+      operator_id_name = #{operatorIdName,jdbcType=VARCHAR},
+      sale_date = #{saleDate,jdbcType=BIGINT},
+      sale_discount = #{saleDiscount,jdbcType=REAL},
+      sale_discount_sum = #{saleDiscountSum,jdbcType=REAL},
+      sale_num = #{saleNum,jdbcType=VARCHAR},
+      sale_total_sum = #{saleTotalSum,jdbcType=REAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
